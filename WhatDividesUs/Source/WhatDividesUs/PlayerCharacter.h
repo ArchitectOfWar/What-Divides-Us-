@@ -25,6 +25,10 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	//Rotation camera in Yaw rotation
+	void RotateCameraYaw(float Rate);
+	//Rotation camera in Pitch rotation
+	void RotateCameraPitch(float Rate);
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

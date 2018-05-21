@@ -3,6 +3,7 @@
 #include "PlayerCharacter.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "Engine/World.h"
 
 // Sets default values
 APlayerCharacter::APlayerCharacter()
@@ -27,6 +28,16 @@ void APlayerCharacter::BeginPlay()
 	Super::BeginPlay();
 	
 }
+//Rotation camera in Yaw rotation
+void APlayerCharacter::RotateCameraYaw(float Rate)
+{
+	AddControllerYawInput(Rate * 45.0f * GetWorld()->GetDeltaSeconds());
+}
+//Rotation camera in Pitch rotation
+void APlayerCharacter::RotateCameraPitch(float Rate)
+{
+	AddControllerPitchInput(Rate * 45.0f * GetWorld()->GetDeltaSeconds());
+}
 
 // Called every frame
 void APlayerCharacter::Tick(float DeltaTime)
@@ -39,6 +50,9 @@ void APlayerCharacter::Tick(float DeltaTime)
 void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
+
+	PlayerInputComponent->BindAxis("RotateCameraYaw", this, &APlayerCharacter::RotateCameraYaw);
+	PlayerInputComponent->BindAxis("RotateCameraPitch", this, &APlayerCharacter::RotateCameraPitch);
 
 }
 
