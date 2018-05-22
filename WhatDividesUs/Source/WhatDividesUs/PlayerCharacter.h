@@ -29,6 +29,11 @@ protected:
 	void RotateCameraYaw(float Rate);
 	//Rotation camera in Pitch rotation
 	void RotateCameraPitch(float Rate);
+
+
+	//Input
+	void MoveForward(float Ratio);
+	void MoveRight(float Ratio);
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
