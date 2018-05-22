@@ -39,6 +39,22 @@ void APlayerCharacter::RotateCameraPitch(float Rate)
 	AddControllerPitchInput(Rate * 45.0f * GetWorld()->GetDeltaSeconds());
 }
 
+void APlayerCharacter::MoveForward(float Ratio)
+{
+	if (Controller)
+	{
+		AddMovementInput(this->GetActorForwardVector(), Ratio);
+	}
+}
+
+void APlayerCharacter::MoveRight(float Ratio)
+{
+	if (Controller)
+	{
+		AddMovementInput(this->GetActorRightVector(), Ratio);
+	}
+}
+
 // Called every frame
 void APlayerCharacter::Tick(float DeltaTime)
 {
@@ -53,6 +69,9 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 
 	PlayerInputComponent->BindAxis("RotateCameraYaw", this, &APlayerCharacter::RotateCameraYaw);
 	PlayerInputComponent->BindAxis("RotateCameraPitch", this, &APlayerCharacter::RotateCameraPitch);
+
+	PlayerInputComponent->BindAxis("MoveForward", this, &APlayerCharacter::MoveForward);
+	PlayerInputComponent->BindAxis("MoveRight", this, &APlayerCharacter::MoveRight);
 
 }
 
